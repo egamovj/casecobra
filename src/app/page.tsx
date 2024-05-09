@@ -30,8 +30,8 @@ export default function Home() {
                     High quality, durable material
                   </li>
                   <li className="flex gap-1.5 items-center text-left">
-                    <Check className="h-5 w-5 shrink-0 text-green-600" />
-                    5 year print guarantee
+                    <Check className="h-5 w-5 shrink-0 text-green-600" />5 year
+                    print guarantee
                   </li>
                   <li className="flex gap-1.5 items-center text-left">
                     <Check className="h-5 w-5 shrink-0 text-green-600" />
@@ -40,7 +40,35 @@ export default function Home() {
                 </div>
               </ul>
 
-              
+              <div className="mt-12 flex flex-col sm:flex-row items-center sm:items-start gap-5">
+                <div className="flex -space-x-4">
+                  <img
+                    src="/users/user-1.png"
+                    alt="user image"
+                    className="inline-block h-10 w-10 rounded-full ring-2 ring-slate-100"
+                  />
+                  <img
+                    src="/users/user-2.png"
+                    alt="user image"
+                    className="inline-block h-10 w-10 rounded-full ring-2 ring-slate-100"
+                  />
+                  <img
+                    src="/users/user-3.png"
+                    alt="user image"
+                    className="inline-block h-10 w-10 rounded-full ring-2 ring-slate-100"
+                  />
+                  <img
+                    src="/users/user-4.jpg"
+                    alt="user image"
+                    className="inline-block h-10 w-10 rounded-full ring-2 ring-slate-100"
+                  />
+                  <img
+                    src="/users/user-5.jpg"
+                    alt="user image"
+                    className="inline-block h-10 w-10 rounded-full ring-2 ring-slate-100"
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </MaxWidthWrapper>
