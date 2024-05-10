@@ -183,10 +183,15 @@ export default function Home() {
             </div>
           </div>
         </MaxWidthWrapper>
-
         <div className="pt-16">
           <Reviews />
         </div>
+      </section>
+
+      <section>
+        <MaxWidthWrapper className="py-24">
+          <div></div>
+        </MaxWidthWrapper>
       </section>
     </div>
   );
