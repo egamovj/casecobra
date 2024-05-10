@@ -1,7 +1,7 @@
 "use client";
 
 /* eslint-disable @next/next/no-img-element */
-import React, { useRef, useState } from "react";
+import React, { HTMLAttributes, useEffect, useRef, useState } from "react";
 import MaxWidthWrapper from "./MaxWidthWrapper";
 import { useInView } from "framer-motion";
 import { cn } from "@/lib/utils";
@@ -40,10 +40,65 @@ function ReviewColumn({
   reviewClassName?: (reviewIndex: number) => string;
   msPerPixel?: number;
 }) {
-    const columnRef = useRef<HTMLDivElement | null>(null)
-    const [columnHeight, setColumnHeight] = useState(0)
+  const columnRef = useRef<HTMLDivElement | null>(null);
+  const [columnHeight, setColumnHeight] = useState(0);
+  const duration = `${columnHeight * msPerPixel}ms`;
 
-    return <div ref={columnRef} className={cn("animate-marquee space-y-8 py-4")} style={{'--marquee-duration': duration} as React.CSSProperties}></div>
+  useEffect(() => {
+    if (!columnRef.current) return;
+
+    const resizeObserver = new window.ResizeObserver(() => {
+      setColumnHeight(columnRef.current?.offsetHeight ?? 0);
+    });
+
+    resizeObserver.observe(columnRef.current);
+
+    return () => {
+      resizeObserver.disconnect();
+    };
+  }, []);
+
+  return (
+    <div
+      ref={columnRef}
+      className={cn("animate-marquee space-y-8 py-4")}
+      style={{ "--marquee-duration": duration } as React.CSSProperties}
+    >
+      {reviews.concat(reviews).map((imgSrc, reviewIndex) => (
+        <Review imgSrc={""} />
+      ))}
+    </div>
+  );
+}
+
+interface ReviewProps extends HTMLAttributes<HTMLDivElement> {
+  imgSrc: string;
+}
+
+function Review({ imgSrc, className, ...props }: ReviewProps) {
+  const POSSIBLE_ANIMATION_DELAYS = [
+    "0s",
+    "0.1s",
+    "0.2s",
+    "0.3s",
+    "0.4s",
+    "0.5s",
+  ];
+
+  const animationDelay =
+    POSSIBLE_ANIMATION_DELAYS[
+      Math.floor(Math.random() * POSSIBLE_ANIMATION_DELAYS.length)
+    ];
+
+  return (
+    <div
+      className={cn(
+        "animate-fade-in rounded-[2.25rem] bg-white p-6 opacity-0 shadow-xl shadow-slate-900/5",
+        className
+      )}
+      {...props}
+    ></div>
+  );
 }
 
 function ReviewGrid() {
