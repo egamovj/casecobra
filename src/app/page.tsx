@@ -1,9 +1,10 @@
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable @next/next/no-img-element */
+import { Check, Star } from "lucide-react";
 import { Icons } from "@/components/Icons";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import Phone from "@/components/Phone";
-import { Check, Star } from "lucide-react";
+import { Reviews } from "@/components/Reviews";
 
 export default function Home() {
   return (
@@ -182,6 +183,10 @@ export default function Home() {
             </div>
           </div>
         </MaxWidthWrapper>
+
+        <div className="pt-16">
+          <Reviews />
+        </div>
       </section>
     </div>
   );
