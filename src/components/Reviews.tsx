@@ -5,6 +5,7 @@ import React, { HTMLAttributes, useEffect, useRef, useState } from "react";
 import MaxWidthWrapper from "./MaxWidthWrapper";
 import { useInView } from "framer-motion";
 import { cn } from "@/lib/utils";
+import Phone from "./Phone";
 
 const PHONES = [
   "/testimonials/1.jpg",
@@ -65,7 +66,11 @@ function ReviewColumn({
       style={{ "--marquee-duration": duration } as React.CSSProperties}
     >
       {reviews.concat(reviews).map((imgSrc, reviewIndex) => (
-        <Review imgSrc={""} />
+        <Review
+          key={reviewIndex}
+          className={reviewClassName?.(reviewIndex % reviews.length)}
+          imgSrc={imgSrc}
+        />
       ))}
     </div>
   );
@@ -96,8 +101,11 @@ function Review({ imgSrc, className, ...props }: ReviewProps) {
         "animate-fade-in rounded-[2.25rem] bg-white p-6 opacity-0 shadow-xl shadow-slate-900/5",
         className
       )}
+      style={{ animationDelay }}
       {...props}
-    ></div>
+    >
+      <Phone imgSrc={imgSrc} />
+    </div>
   );
 }
 
@@ -116,7 +124,29 @@ function ReviewGrid() {
     >
       {isInView ? (
         <>
-          <ReviewColumn reviews={[]} />
+          <ReviewColumn
+            reviews={[...column1, ...column3.flat(), ...column2]}
+            reviewClassName={(reviewIndex) =>
+              cn({
+                "md:hidden": reviewIndex >= column1.length + column3[0].length,
+                "lg:hidden": reviewIndex >= column1.length,
+              })
+            }
+            msPerPixel={10}
+          />
+          <ReviewColumn
+            reviews={[...column2, ...column3[1]]}
+            className="hidden md:block"
+            reviewClassName={(reviewIndex) =>
+              reviewIndex >= column2.length ? "lg:hidden" : ""
+            }
+            msPerPixel={15}
+          />
+          <ReviewColumn
+            reviews={column3.flat()}
+            className="hidden md:block"
+            msPerPixel={10}
+          />
         </>
       ) : null}
     </div>
