@@ -2,7 +2,6 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 Modern Next.js E-commerce. A site with several functions. This site was created using Next.js, TailwindCSS, Typescript. On this site, you can put any picture you want on the phone case and buy it
 
-
 ## Getting Started
 
 First, run the development server:
