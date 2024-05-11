@@ -42,7 +42,7 @@ const Page = () => {
               className="dropzone h-full w-full flex-1 flex flex-col items-center justify-center"
             >
               <input {...getInputProps()} />
-              <p>Drag and drop some files here, or click to select files</p>
+              <p className="text-center">Drag and drop some files here, or click to select files</p>
             </div>
           )}
         </Dropzone>
