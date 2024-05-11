@@ -71,10 +71,32 @@ const Steps = () => {
                       "text-primary": isCompleted,
                       "text-zinc-700": isCurrent,
                     })}
-                  >{step.name}</span>
-                  <span className="text-sm text-zinc-500">{step.description}</span>
+                  >
+                    {step.name}
+                  </span>
+                  <span className="text-sm text-zinc-500">
+                    {step.description}
+                  </span>
                 </span>
               </span>
+
+              {/* separator */}
+              {i !== 0 ? (
+                <div className="absolute inset-0 hidden w-3 lg:block">
+                  <svg
+                    className="h-full w-full text-gray-300"
+                    viewBox="0 0 12 82"
+                    fill="none"
+                    preserveAspectRatio="none"
+                  >
+                    <path
+                      d="M0.5 0V31L10.5 41L0.5 51V82"
+                      stroke="currentcolor"
+                      vectorEffect="non-scaling-stroke"
+                    />
+                  </svg>
+                </div>
+              ) : null}
             </div>
           </li>
         );
