@@ -1,10 +1,19 @@
 "use client";
 
-import { cn } from "@/lib/utils";
 import React, { useState } from "react";
+import { cn } from "@/lib/utils";
+import Dropzone, { FileRejection } from "react-dropzone";
 
 const Page = () => {
   const [isDragOver, setIsDragOver] = useState<boolean>(false);
+
+  const onDropRejected = (rejectedFiles: FileRejection[]) => {
+    console.log("Rejected files:", rejectedFiles);
+  };
+
+  const onDropAccepted = (acceptedFiles: File[]) => {
+    console.log("Accepted files:", acceptedFiles);
+  };
 
   return (
     <div
@@ -14,7 +23,31 @@ const Page = () => {
           "ring-blue-900/25 bg-blue-900/10": isDragOver,
         }
       )}
-    ></div>
+    >
+      <div className="relative flex flex-1 flex-col items-center justify-center w-full">
+        <Dropzone
+          onDropRejected={onDropRejected}
+          onDropAccepted={onDropAccepted}
+          accept={{
+            "image/png": [".png"],
+            "image/jpeg": [".jpeg"],
+            "image/jpg": [".jpg"],
+          }}
+          onDragEnter={() => setIsDragOver(true)}
+          onDragLeave={() => setIsDragOver(false)}
+        >
+          {({ getRootProps, getInputProps }) => (
+            <div
+              {...getRootProps()}
+              className="dropzone h-full w-full flex-1 flex flex-col items-center justify-center"
+            >
+              <input {...getInputProps()} />
+              <p>Drag and drop some files here, or click to select files</p>
+            </div>
+          )}
+        </Dropzone>
+      </div>
+    </div>
   );
 };
 
